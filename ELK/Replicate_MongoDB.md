@@ -27,3 +27,9 @@
 - **Run**
   - mongo-connector -m 9.115.85.124:27017 -t 9.110.74.161:9200 -d elastic2_doc_manager
   - mongo-connector -m 127.0.0.1:27017 -t 9.110.74.161:9200 -d elastic2_doc_manager
+
+##Run connect
+Run replicate set :
+
+* mongod --replSet myDevReplSet
+* mongo-connector -m 127.0.0.1:27017 -t 9.110.74.161:9200 -d elastic2_doc_manager
