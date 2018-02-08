@@ -27,5 +27,53 @@ plugin.mandatory: ingest-attachment
 
 ```
 
+Pipeline
+
+```json
+PUT _ingest/pipeline/attachment
+{
+  "description" : "Extract attachment information",
+  "processors" : [
+    {
+      "attachment" : {
+        "field" : "data",
+        "indexed_chars" : -1
+      }
+    }
+  ]
+}
+```
+
+Index
+
+```json
+PUT gov_file_index
+{ 
+    "mappings" : { 
+        "my_type" : { 
+            "properties" : { 
+                "attachment.data" : { 
+                    "type": "text", 
+                    "analyzer" : "standard" 
+                } 
+            } 
+        } 
+    } 
+}
+```
+
+
+
+## Case
+
+```json
+PUT gov_file_index/my_type/1?pipeline=attachment&refresh=true&pretty=1
+{
+    "id": "1",
+    "filename": "1.txt",
+    "data" : "e1xydGYxXGFuc2kNCkxvcmVtIGlwc3VtIGRvbG9yIHNpdCBhbWV0DQpccGFyIH0="
+}
+```
+
 
 
